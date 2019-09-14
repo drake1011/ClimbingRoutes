@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace ClimbingRoutesApi.Controllers
+namespace ClimbingRoutes.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

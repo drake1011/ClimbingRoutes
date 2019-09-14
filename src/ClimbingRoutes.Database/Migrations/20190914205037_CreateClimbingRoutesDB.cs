@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace dot_net_core_api.console_app.Migrations
+namespace ClimbingRoutes.Database.Migrations
 {
     public partial class CreateClimbingRoutesDB : Migration
     {

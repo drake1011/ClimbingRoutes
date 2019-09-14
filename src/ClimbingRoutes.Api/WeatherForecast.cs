@@ -1,6 +1,6 @@
 using System;
 
-namespace ClimbingRoutesApi
+namespace ClimbingRoutes.Api
 {
     public class WeatherForecast
     {

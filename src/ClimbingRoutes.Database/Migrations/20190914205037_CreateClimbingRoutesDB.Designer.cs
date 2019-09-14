@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace dot_net_core_api.console_app.Migrations
+namespace ClimbingRoutes.Database.Migrations
 {
     [DbContext(typeof(ClimbingRoutesContext))]
-    [Migration("20190914184551_CreateClimbingRoutesDB")]
+    [Migration("20190914205037_CreateClimbingRoutesDB")]
     partial class CreateClimbingRoutesDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

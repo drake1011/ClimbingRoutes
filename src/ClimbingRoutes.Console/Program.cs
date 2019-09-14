@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace dot_net_core_api.console_app
+namespace ClimbingRoutes.Console
 {
     class Program
     {
