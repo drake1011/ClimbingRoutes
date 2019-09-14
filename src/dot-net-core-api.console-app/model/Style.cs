@@ -1,5 +1,10 @@
-public class Style
+
+
+namespace ClimbingRoutes
 {
-    public int StyleId { get; set; }
-    public string Description { get; set; }
+    public class Style
+    {
+        public int StyleId { get; set; }
+        public string Description { get; set; }
+    }
 }

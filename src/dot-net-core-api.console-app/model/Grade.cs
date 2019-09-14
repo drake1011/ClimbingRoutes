@@ -1,5 +1,9 @@
-public class Grade
+
+namespace ClimbingRoutes
 {
-    public int GradeId { get; set; }
-    public string Description { get; set; }
+    public class Grade
+    {
+        public int GradeId { get; set; }
+        public string Description { get; set; }
+    }
 }
