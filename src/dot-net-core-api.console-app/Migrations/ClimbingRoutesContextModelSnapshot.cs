@@ -35,6 +35,12 @@ namespace dot_net_core_api.console_app.Migrations
 
                     b.HasKey("AscentId");
 
+                    b.HasIndex("RouteId");
+
+                    b.HasIndex("StyleId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Ascents");
                 });
 
@@ -57,9 +63,13 @@ namespace dot_net_core_api.console_app.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("GradeId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("RouteId");
+
+                    b.HasIndex("GradeId");
 
                     b.ToTable("Routes");
                 });
@@ -88,6 +98,32 @@ namespace dot_net_core_api.console_app.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ClimbingRoutes.Ascent", b =>
+                {
+                    b.HasOne("ClimbingRoutes.Route")
+                        .WithMany("Ascents")
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ClimbingRoutes.Style")
+                        .WithMany("Ascents")
+                        .HasForeignKey("StyleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ClimbingRoutes.User")
+                        .WithMany("Ascents")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ClimbingRoutes.Route", b =>
+                {
+                    b.HasOne("ClimbingRoutes.Grade", "Grade")
+                        .WithMany("Routes")
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

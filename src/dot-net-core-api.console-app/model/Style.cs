@@ -1,4 +1,4 @@
-
+using System.Collections.Generic;
 
 namespace ClimbingRoutes
 {
@@ -6,5 +6,7 @@ namespace ClimbingRoutes
     {
         public int StyleId { get; set; }
         public string Description { get; set; }
+
+        public IList<Ascent> Ascents { get; set; }
     }
 }

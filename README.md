@@ -12,6 +12,7 @@ Set Up
 0. Create a solution and add a project, as per my previous article. 
 0. Install the design package with `dotnet add package Microsoft.EntityFrameworkCore.Design`
 0. `dotnet add package Microsoft.EntityFrameworkCore.SqlServer`
+0. `dotnet-ef migrations add CreateClimbingRoutesDB`
 
 
 
