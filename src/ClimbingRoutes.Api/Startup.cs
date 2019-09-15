@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ClimbingRoutes.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClimbingRoutes.Api
 {
@@ -26,7 +27,8 @@ namespace ClimbingRoutes.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ClimbingRoutesContext>();
+            services.AddDbContext<ClimbingRoutesContext>(
+                opt => opt.UseSqlServer(@"Server=.\;Database=ClimbingRoutes;Trusted_Connection=True;"));
             services.AddControllers();
         }
 
