@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ClimbingRoutes.Api.DataTransferObjects;
 
 namespace ClimbingRoutes.Api.Controllers
 {
@@ -12,7 +13,7 @@ namespace ClimbingRoutes.Api.Controllers
     public class RoutesController : ControllerBase
     {
         private readonly ClimbingRoutesContext _context;
-
+        private readonly ILogger<ClimbingRoutesContext> _logger;
 
         public RoutesController(ClimbingRoutesContext context)
         {
@@ -27,16 +28,13 @@ namespace ClimbingRoutes.Api.Controllers
 
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<RouteDTO> GetRouteNames()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return new List<RouteDTO> {
+                new RouteDTO() { Name = "Savage Amusement" },
+                new RouteDTO() { Name = "Nirvana" },
+                new RouteDTO() { Name = "Spandex Ballet" }
+            };
         }
     }
 }
