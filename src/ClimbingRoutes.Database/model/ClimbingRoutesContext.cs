@@ -12,7 +12,7 @@ namespace ClimbingRoutes
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\;Database=ClimbingRoutes;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer(@"Server=.\;Database=ClimbingRoutes;Trusted_Connection=True;");
         }
 
         public ClimbingRoutesContext(DbContextOptions<ClimbingRoutesContext> options) : base(options)

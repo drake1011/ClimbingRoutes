@@ -9,18 +9,18 @@ namespace ClimbingRoutes.Database.Test
 {
     public class TestClimbingRoutesContext
     {
-        // [Fact]
-        // public void TrivialTest()
-        // {
-        //     // Arrange
-        //     var user = new User() { Name = "Andy", Email = "123@456.com" };
+        [Fact]
+        public void TrivialTest()
+        {
+            // Arrange
+            var user = new User() { Name = "Andy", Email = "123@456.com" };
 
-        //     // Act
-        //     user.Name = "Changed";
+            // Act
+            user.Name = "Changed";
 
-        //     //Assert
-        //     Assert.Equal("Changed", user.Name);
-        // }
+            //Assert
+            Assert.Equal("Changed", user.Name);
+        }
 
         [Fact]
         public void BasicDatabaseTest()
