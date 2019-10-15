@@ -7,6 +7,7 @@ namespace ClimbingRoutes
     {
         public int UserId { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
 
         public IList<Ascent> Ascents { get; set; }
     }

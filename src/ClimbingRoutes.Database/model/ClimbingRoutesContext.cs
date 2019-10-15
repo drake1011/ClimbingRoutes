@@ -14,5 +14,9 @@ namespace ClimbingRoutes
         {
             optionsBuilder.UseSqlServer(@"Server=.\;Database=ClimbingRoutes;Trusted_Connection=True;");
         }
+
+        public ClimbingRoutesContext(DbContextOptions<ClimbingRoutesContext> options) : base(options)
+        {
+        }
     }
 }
