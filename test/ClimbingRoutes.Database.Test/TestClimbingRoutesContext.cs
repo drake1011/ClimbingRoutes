@@ -40,31 +40,18 @@ namespace ClimbingRoutes.Database.Test
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                context.Users.Add(new User()
-                {
-                    Name = "Matthew"
-                });
-
-                context.Users.Add(new User()
-                {
-                    Name = "Mark"
-                });
-
-                context.Users.Add(new User()
-                {
-                    Name = "Luke"
-                });
-
-                context.Users.Add(new User()
-                {
-                    Name = "John"
-                });
+                context.Users.Add(new User() { Name = "Matthew" });
+                context.Users.Add(new User() { Name = "Mark" });
+                context.Users.Add(new User() { Name = "Luke" });
+                context.Users.Add(new User() { Name = "John" });
 
                 context.SaveChanges();
             }
 
             int numUser;
-            int expected = 4;
+
+            // Three are added in the seed data. For a total of 7...
+            int expected = 7;
 
             using (var context = new ClimbingRoutesContext(options))
             {

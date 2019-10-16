@@ -76,7 +76,7 @@ namespace ClimbingRoutes.Database.Migrations
                     UserId = table.Column<int>(nullable: false),
                     RouteId = table.Column<int>(nullable: false),
                     StyleId = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
