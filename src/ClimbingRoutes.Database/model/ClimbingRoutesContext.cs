@@ -15,12 +15,65 @@ namespace ClimbingRoutes
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-        modelBuilder.Entity<User>().HasData(
-            new User { UserId = 1, Name = "Andy", Email = "123@456.com", Temp = "Delete me" },
-            new User { UserId = 2, Name = "Keith", Email = "789@456.com", Temp = "Delete me" }
-        );
-}
+        {
+            modelBuilder.Entity<User>().HasData(
+                new User { UserId = 1, Name = "Andy", Email = "123@456.com" },
+                new User { UserId = 2, Name = "Keith", Email = "789@456.com" },
+                new User { UserId = 3, Name = "Zorro", Email = "legend_of@456.com" }
+            );
+
+            modelBuilder.Entity<Grade>().HasData(
+                new Grade { GradeId = 1, Description = "7a" },
+                new Grade { GradeId = 2, Description = "7b" },
+                new Grade { GradeId = 3, Description = "7c" }
+            );
+
+            modelBuilder.Entity<Route>().HasData(
+                new Route { RouteId = 1,  Name = "Savage Amusement", GradeId = 2},
+                new Route { RouteId = 2,  Name = "Nirvana", GradeId = 1 },
+                new Route { RouteId = 4,  Name = "Le Bon Vacance", GradeId = 1 },
+                new Route { RouteId = 3,  Name = "Sultan", GradeId = 3 }
+            );
+
+            modelBuilder.Entity<Style>().HasData(
+                new Style { StyleId = 1, Description = "On Sight" },
+                new Style { StyleId = 2, Description = "Worked" },
+                new Style { StyleId = 3, Description = "Dogged" },
+                new Style { StyleId = 4, Description = "Fail" }
+            );
+
+            modelBuilder.Entity<Ascent>().HasData(
+                new Ascent {
+                    AscentId = 1,
+                    UserId = 1,
+                    RouteId = 1,
+                    StyleId = 2,
+                    Date = new System.DateTime(year: 2015, month: 7, day: 24)
+                },
+                new Ascent {
+                    AscentId = 2,
+                    UserId = 1,
+                    RouteId = 4,
+                    StyleId = 2,
+                    Date = new System.DateTime(year: 2011, month: 7, day: 4)
+                },
+                new Ascent {
+                    AscentId = 3,
+                    UserId = 1,
+                    RouteId = 2,
+                    StyleId = 2,
+                    Date = new System.DateTime(year: 2015, month: 8, day: 1)
+                },
+                new Ascent {
+                    AscentId = 4,
+                    UserId = 1,
+                    RouteId = 3,
+                    StyleId = 4,
+                    Date = new System.DateTime(year: 2015, month: 9, day: 1)
+                }
+
+            );
+        }
 
         public ClimbingRoutesContext(DbContextOptions<ClimbingRoutesContext> options) : base(options)
         {

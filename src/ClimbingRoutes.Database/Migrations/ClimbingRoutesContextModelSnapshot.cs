@@ -47,6 +47,40 @@ namespace ClimbingRoutes.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Ascents");
+
+                    b.HasData(
+                        new
+                        {
+                            AscentId = 1,
+                            Date = new DateTime(2015, 7, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteId = 1,
+                            StyleId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            AscentId = 2,
+                            Date = new DateTime(2011, 7, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteId = 4,
+                            StyleId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            AscentId = 3,
+                            Date = new DateTime(2015, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteId = 2,
+                            StyleId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            AscentId = 4,
+                            Date = new DateTime(2015, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteId = 3,
+                            StyleId = 4,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Grade", b =>
@@ -62,6 +96,23 @@ namespace ClimbingRoutes.Database.Migrations
                     b.HasKey("GradeId");
 
                     b.ToTable("Grades");
+
+                    b.HasData(
+                        new
+                        {
+                            GradeId = 1,
+                            Description = "7a"
+                        },
+                        new
+                        {
+                            GradeId = 2,
+                            Description = "7b"
+                        },
+                        new
+                        {
+                            GradeId = 3,
+                            Description = "7c"
+                        });
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Route", b =>
@@ -82,6 +133,32 @@ namespace ClimbingRoutes.Database.Migrations
                     b.HasIndex("GradeId");
 
                     b.ToTable("Routes");
+
+                    b.HasData(
+                        new
+                        {
+                            RouteId = 1,
+                            GradeId = 2,
+                            Name = "Savage Amusement"
+                        },
+                        new
+                        {
+                            RouteId = 2,
+                            GradeId = 1,
+                            Name = "Nirvana"
+                        },
+                        new
+                        {
+                            RouteId = 4,
+                            GradeId = 1,
+                            Name = "Le Bon Vacance"
+                        },
+                        new
+                        {
+                            RouteId = 3,
+                            GradeId = 3,
+                            Name = "Sultan"
+                        });
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Style", b =>
@@ -97,6 +174,28 @@ namespace ClimbingRoutes.Database.Migrations
                     b.HasKey("StyleId");
 
                     b.ToTable("Styles");
+
+                    b.HasData(
+                        new
+                        {
+                            StyleId = 1,
+                            Description = "On Sight"
+                        },
+                        new
+                        {
+                            StyleId = 2,
+                            Description = "Worked"
+                        },
+                        new
+                        {
+                            StyleId = 3,
+                            Description = "Dogged"
+                        },
+                        new
+                        {
+                            StyleId = 4,
+                            Description = "Fail"
+                        });
                 });
 
             modelBuilder.Entity("ClimbingRoutes.User", b =>
@@ -112,12 +211,6 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Temp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Temp2")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
@@ -127,15 +220,19 @@ namespace ClimbingRoutes.Database.Migrations
                         {
                             UserId = 1,
                             Email = "123@456.com",
-                            Name = "Andy",
-                            Temp = "Delete me"
+                            Name = "Andy"
                         },
                         new
                         {
                             UserId = 2,
                             Email = "789@456.com",
-                            Name = "Keith",
-                            Temp = "Delete me"
+                            Name = "Keith"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            Email = "legend_of@456.com",
+                            Name = "Zorro"
                         });
                 });
 

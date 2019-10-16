@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ClimbingRoutes.Database.Migrations
 {
-    public partial class CreateClimbingRoutesDB : Migration
+    public partial class Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,9 +40,7 @@ namespace ClimbingRoutes.Database.Migrations
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Temp = table.Column<string>(nullable: true),
-                    Temp2 = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,14 +102,57 @@ namespace ClimbingRoutes.Database.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "UserId", "Email", "Name", "Temp", "Temp2" },
-                values: new object[] { 1, "123@456.com", "Andy", "Delete me", null });
+                table: "Grades",
+                columns: new[] { "GradeId", "Description" },
+                values: new object[,]
+                {
+                    { 1, "7a" },
+                    { 2, "7b" },
+                    { 3, "7c" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Styles",
+                columns: new[] { "StyleId", "Description" },
+                values: new object[,]
+                {
+                    { 1, "On Sight" },
+                    { 2, "Worked" },
+                    { 3, "Dogged" },
+                    { 4, "Fail" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "Name", "Temp", "Temp2" },
-                values: new object[] { 2, "789@456.com", "Keith", "Delete me", null });
+                columns: new[] { "UserId", "Email", "Name" },
+                values: new object[,]
+                {
+                    { 1, "123@456.com", "Andy" },
+                    { 2, "789@456.com", "Keith" },
+                    { 3, "legend_of@456.com", "Zorro" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Routes",
+                columns: new[] { "RouteId", "GradeId", "Name" },
+                values: new object[,]
+                {
+                    { 2, 1, "Nirvana" },
+                    { 4, 1, "Le Bon Vacance" },
+                    { 1, 2, "Savage Amusement" },
+                    { 3, 3, "Sultan" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ascents",
+                columns: new[] { "AscentId", "Date", "RouteId", "StyleId", "UserId" },
+                values: new object[,]
+                {
+                    { 3, new DateTime(2015, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1 },
+                    { 2, new DateTime(2011, 7, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 2, 1 },
+                    { 1, new DateTime(2015, 7, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, 1 },
+                    { 4, new DateTime(2015, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 4, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ascents_RouteId",
