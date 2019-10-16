@@ -12,12 +12,15 @@ namespace ClimbingRoutes
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=.\;Database=ClimbingRoutes;Trusted_Connection=True;");
         }
 
-        // public ClimbingRoutesContext()
-        // {
-        // }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+        modelBuilder.Entity<User>().HasData(
+            new User { UserId = 1, Name = "Andy", Email = "123@456.com", Temp = "Delete me" },
+            new User { UserId = 2, Name = "Keith", Email = "789@456.com", Temp = "Delete me" }
+        );
+}
 
         public ClimbingRoutesContext(DbContextOptions<ClimbingRoutesContext> options) : base(options)
         {

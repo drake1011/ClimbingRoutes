@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ClimbingRoutes.Database.Migrations
@@ -13,7 +12,7 @@ namespace ClimbingRoutes.Database.Migrations
                 columns: table => new
                 {
                     GradeId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -26,7 +25,7 @@ namespace ClimbingRoutes.Database.Migrations
                 columns: table => new
                 {
                     StyleId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -39,8 +38,11 @@ namespace ClimbingRoutes.Database.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Temp = table.Column<string>(nullable: true),
+                    Temp2 = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,7 +54,7 @@ namespace ClimbingRoutes.Database.Migrations
                 columns: table => new
                 {
                     RouteId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     GradeId = table.Column<int>(nullable: false)
                 },
@@ -72,7 +74,7 @@ namespace ClimbingRoutes.Database.Migrations
                 columns: table => new
                 {
                     AscentId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
                     RouteId = table.Column<int>(nullable: false),
                     StyleId = table.Column<int>(nullable: false),
@@ -100,6 +102,16 @@ namespace ClimbingRoutes.Database.Migrations
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Email", "Name", "Temp", "Temp2" },
+                values: new object[] { 1, "123@456.com", "Andy", "Delete me", null });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Email", "Name", "Temp", "Temp2" },
+                values: new object[] { 2, "789@456.com", "Keith", "Delete me", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ascents_RouteId",

@@ -115,9 +115,28 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<string>("Temp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Temp2")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Email = "123@456.com",
+                            Name = "Andy",
+                            Temp = "Delete me"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Email = "789@456.com",
+                            Name = "Keith",
+                            Temp = "Delete me"
+                        });
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Ascent", b =>
