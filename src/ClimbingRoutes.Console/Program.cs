@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClimbingRoutes.Console
+namespace ClimbingRoutes
 {
     class Program
     {

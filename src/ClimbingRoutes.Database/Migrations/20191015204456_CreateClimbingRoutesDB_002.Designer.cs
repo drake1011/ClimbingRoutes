@@ -4,18 +4,20 @@ using ClimbingRoutes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClimbingRoutes.Database.Migrations
 {
     [DbContext(typeof(ClimbingRoutesContext))]
-    partial class ClimbingRoutesContextModelSnapshot : ModelSnapshot
+    [Migration("20191015204456_CreateClimbingRoutesDB_002")]
+    partial class CreateClimbingRoutesDB_002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -23,20 +25,15 @@ namespace ClimbingRoutes.Database.Migrations
                 {
                     b.Property<int>("AscentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("Date");
 
-                    b.Property<int>("RouteId")
-                        .HasColumnType("int");
+                    b.Property<int>("RouteId");
 
-                    b.Property<int>("StyleId")
-                        .HasColumnType("int");
+                    b.Property<int>("StyleId");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<int>("UserId");
 
                     b.HasKey("AscentId");
 
@@ -53,11 +50,9 @@ namespace ClimbingRoutes.Database.Migrations
                 {
                     b.Property<int>("GradeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Description");
 
                     b.HasKey("GradeId");
 
@@ -68,14 +63,11 @@ namespace ClimbingRoutes.Database.Migrations
                 {
                     b.Property<int>("RouteId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("GradeId")
-                        .HasColumnType("int");
+                    b.Property<int>("GradeId");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name");
 
                     b.HasKey("RouteId");
 
@@ -88,11 +80,9 @@ namespace ClimbingRoutes.Database.Migrations
                 {
                     b.Property<int>("StyleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Description");
 
                     b.HasKey("StyleId");
 
@@ -103,17 +93,11 @@ namespace ClimbingRoutes.Database.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Email");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Temp")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name");
 
                     b.HasKey("UserId");
 
@@ -122,23 +106,20 @@ namespace ClimbingRoutes.Database.Migrations
 
             modelBuilder.Entity("ClimbingRoutes.Ascent", b =>
                 {
-                    b.HasOne("ClimbingRoutes.Route", null)
+                    b.HasOne("ClimbingRoutes.Route")
                         .WithMany("Ascents")
                         .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ClimbingRoutes.Style", null)
+                    b.HasOne("ClimbingRoutes.Style")
                         .WithMany("Ascents")
                         .HasForeignKey("StyleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ClimbingRoutes.User", null)
+                    b.HasOne("ClimbingRoutes.User")
                         .WithMany("Ascents")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Route", b =>
@@ -146,8 +127,7 @@ namespace ClimbingRoutes.Database.Migrations
                     b.HasOne("ClimbingRoutes.Grade", "Grade")
                         .WithMany("Routes")
                         .HasForeignKey("GradeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
