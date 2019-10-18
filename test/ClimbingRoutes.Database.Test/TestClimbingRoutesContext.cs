@@ -22,6 +22,120 @@ namespace ClimbingRoutes.Database.Test
             Assert.Equal("Changed", user.Name);
         }
 
+        private ClimbingRoutesContext GetNewContext()
+        {
+            var connectionStringBuilder =
+                new SqliteConnectionStringBuilder { DataSource = ":memory:" };
+
+            var connection = new SqliteConnection(connectionStringBuilder.ToString());
+
+            var options = new DbContextOptionsBuilder<ClimbingRoutesContext>()
+                .UseSqlite(connection)
+                .Options;
+
+            return new ClimbingRoutesContext(options);
+        }
+
+                [Fact]
+        public void TestTheSeededUserData()
+        {
+            // Arrange
+            int numUsers;
+            int expected = 3;
+
+            // Act
+            using (var context = this.GetNewContext())
+            {
+                context.Database.OpenConnection();
+                context.Database.EnsureCreated();
+
+                numUsers = context.Users.Count();
+            }
+
+            // Assert
+            Assert.Equal(expected, numUsers);
+        }
+
+                [Fact]
+        public void TestTheSeededGradeData()
+        {
+            // Arrange
+            int numGrades;
+            int expected = 3;
+
+            // Act
+            using (var context = this.GetNewContext())
+            {
+                context.Database.OpenConnection();
+                context.Database.EnsureCreated();
+
+                numGrades = context.Grades.Count();
+            }
+
+            // Assert
+            Assert.Equal(expected, numGrades);
+        }
+
+                [Fact]
+        public void TestTheSeededAscentData()
+        {
+            // Arrange
+            int numAscents;
+            int expected = 3;
+
+            // Act
+            using (var context = this.GetNewContext())
+            {
+                context.Database.OpenConnection();
+                context.Database.EnsureCreated();
+
+                numAscents = context.Grades.Count();
+            }
+
+            // Assert
+            Assert.Equal(expected, numAscents);
+        }
+
+                [Fact]
+        public void TestTheSeededRouteData()
+        {
+            // Arrange
+            int numRoutes;
+            int expected = 4;
+
+            // Act
+            using (var context = this.GetNewContext())
+            {
+                context.Database.OpenConnection();
+                context.Database.EnsureCreated();
+
+                numRoutes = context.Routes.Count();
+            }
+
+            // Assert
+            Assert.Equal(expected, numRoutes);
+        }
+
+                [Fact]
+        public void TestTheSeededStyleData()
+        {
+            // Arrange
+            int numStyles;
+            int expected = 4;
+
+            // Act
+            using (var context = this.GetNewContext())
+            {
+                context.Database.OpenConnection();
+                context.Database.EnsureCreated();
+
+                numStyles = context.Styles.Count();
+            }
+
+            // Assert
+            Assert.Equal(expected, numStyles);
+        }
+
         [Fact]
         public void BasicDatabaseTest()
         {
