@@ -4,14 +4,16 @@ using ClimbingRoutes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClimbingRoutes.Database.Migrations
 {
     [DbContext(typeof(ClimbingRoutesContext))]
-    partial class ClimbingRoutesContextModelSnapshot : ModelSnapshot
+    [Migration("20191018185555_Update005")]
+    partial class Update005
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,14 +231,9 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<int?>("PartnerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
 
                     b.HasIndex("PartnerId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Users");
 
@@ -296,10 +293,6 @@ namespace ClimbingRoutes.Database.Migrations
                     b.HasOne("ClimbingRoutes.Partner", null)
                         .WithMany("Partners")
                         .HasForeignKey("PartnerId");
-
-                    b.HasOne("ClimbingRoutes.User", null)
-                        .WithMany("Partners")
-                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

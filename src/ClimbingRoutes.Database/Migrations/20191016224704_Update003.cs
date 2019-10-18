@@ -2,21 +2,22 @@
 
 namespace ClimbingRoutes.Database.Migrations
 {
-    public partial class test01 : Migration
+    public partial class Update003 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.DropColumn(
                 name: "Temp",
-                table: "Users",
-                nullable: true);
+                table: "Ascents");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            migrationBuilder.AddColumn<string>(
                 name: "Temp",
-                table: "Users");
+                table: "Ascents",
+                type: "nvarchar(max)",
+                nullable: true);
         }
     }
 }

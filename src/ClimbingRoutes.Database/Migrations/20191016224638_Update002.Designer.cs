@@ -4,14 +4,16 @@ using ClimbingRoutes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClimbingRoutes.Database.Migrations
 {
     [DbContext(typeof(ClimbingRoutesContext))]
-    partial class ClimbingRoutesContextModelSnapshot : ModelSnapshot
+    [Migration("20191016224638_Update002")]
+    partial class Update002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +36,9 @@ namespace ClimbingRoutes.Database.Migrations
 
                     b.Property<int>("StyleId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Temp")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -113,21 +118,6 @@ namespace ClimbingRoutes.Database.Migrations
                             GradeId = 3,
                             Description = "7c"
                         });
-                });
-
-            modelBuilder.Entity("ClimbingRoutes.Partner", b =>
-                {
-                    b.Property<int>("PartnerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PartnerId");
-
-                    b.ToTable("Partners");
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Route", b =>
@@ -226,17 +216,7 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PartnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
-
-                    b.HasIndex("PartnerId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Users");
 
@@ -289,17 +269,6 @@ namespace ClimbingRoutes.Database.Migrations
                         .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ClimbingRoutes.User", b =>
-                {
-                    b.HasOne("ClimbingRoutes.Partner", null)
-                        .WithMany("Partners")
-                        .HasForeignKey("PartnerId");
-
-                    b.HasOne("ClimbingRoutes.User", null)
-                        .WithMany("Partners")
-                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

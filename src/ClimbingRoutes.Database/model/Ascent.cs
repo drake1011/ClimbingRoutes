@@ -8,6 +8,6 @@ namespace ClimbingRoutes
         public int UserId { get; set; }
         public int RouteId { get; set; }
         public int StyleId { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }
