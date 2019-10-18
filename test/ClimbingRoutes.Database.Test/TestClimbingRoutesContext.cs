@@ -1,6 +1,5 @@
 using System;
 using Xunit;
-using ClimbingRoutes.Database;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -22,21 +21,7 @@ namespace ClimbingRoutes.Database.Test
             Assert.Equal("Changed", user.Name);
         }
 
-        private ClimbingRoutesContext GetNewContext()
-        {
-            var connectionStringBuilder =
-                new SqliteConnectionStringBuilder { DataSource = ":memory:" };
-
-            var connection = new SqliteConnection(connectionStringBuilder.ToString());
-
-            var options = new DbContextOptionsBuilder<ClimbingRoutesContext>()
-                .UseSqlite(connection)
-                .Options;
-
-            return new ClimbingRoutesContext(options);
-        }
-
-                [Fact]
+        [Fact]
         public void TestTheSeededUserData()
         {
             // Arrange
@@ -44,11 +29,8 @@ namespace ClimbingRoutes.Database.Test
             int expected = 3;
 
             // Act
-            using (var context = this.GetNewContext())
+            using (var context = TestHelpers.GetNewContext())
             {
-                context.Database.OpenConnection();
-                context.Database.EnsureCreated();
-
                 numUsers = context.Users.Count();
             }
 
@@ -64,11 +46,8 @@ namespace ClimbingRoutes.Database.Test
             int expected = 3;
 
             // Act
-            using (var context = this.GetNewContext())
+            using (var context = TestHelpers.GetNewContext())
             {
-                context.Database.OpenConnection();
-                context.Database.EnsureCreated();
-
                 numGrades = context.Grades.Count();
             }
 
@@ -84,11 +63,8 @@ namespace ClimbingRoutes.Database.Test
             int expected = 3;
 
             // Act
-            using (var context = this.GetNewContext())
+            using (var context = TestHelpers.GetNewContext())
             {
-                context.Database.OpenConnection();
-                context.Database.EnsureCreated();
-
                 numAscents = context.Grades.Count();
             }
 
@@ -104,11 +80,8 @@ namespace ClimbingRoutes.Database.Test
             int expected = 4;
 
             // Act
-            using (var context = this.GetNewContext())
+            using (var context = TestHelpers.GetNewContext())
             {
-                context.Database.OpenConnection();
-                context.Database.EnsureCreated();
-
                 numRoutes = context.Routes.Count();
             }
 
@@ -124,7 +97,7 @@ namespace ClimbingRoutes.Database.Test
             int expected = 4;
 
             // Act
-            using (var context = this.GetNewContext())
+            using (var context = TestHelpers.GetNewContext())
             {
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();

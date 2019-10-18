@@ -10,5 +10,6 @@ namespace ClimbingRoutes
         public string Email { get; set; }
 
         public IList<Ascent> Ascents { get; set; }
+        public IList<User> Partners { get; set; }
     }
 }
