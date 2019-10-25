@@ -43,7 +43,7 @@ namespace ClimbingRoutes.Database.Test
         {
             // Arrange
             int numGrades;
-            int expected = 3;
+            int expected = 6;
 
             // Act
             using (var context = TestHelpers.GetNewContext())
@@ -60,12 +60,12 @@ namespace ClimbingRoutes.Database.Test
         {
             // Arrange
             int numAscents;
-            int expected = 3;
+            int expected = 4;
 
             // Act
             using (var context = TestHelpers.GetNewContext())
             {
-                numAscents = context.Grades.Count();
+                numAscents = context.Ascents.Count();
             }
 
             // Assert
@@ -77,7 +77,7 @@ namespace ClimbingRoutes.Database.Test
         {
             // Arrange
             int numRoutes;
-            int expected = 4;
+            int expected = 5;
 
             // Act
             using (var context = TestHelpers.GetNewContext())
