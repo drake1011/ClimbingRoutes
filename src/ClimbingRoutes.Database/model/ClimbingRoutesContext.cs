@@ -10,6 +10,7 @@ namespace ClimbingRoutes
         public DbSet<Style> Styles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Partnership> Partnerships { get; set; }
+        public DbSet<Discipline> Disciplines { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -4,14 +4,16 @@ using ClimbingRoutes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClimbingRoutes.Database.Migrations
 {
     [DbContext(typeof(ClimbingRoutesContext))]
-    partial class ClimbingRoutesContextModelSnapshot : ModelSnapshot
+    [Migration("20191025171631_Update009")]
+    partial class Update009
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

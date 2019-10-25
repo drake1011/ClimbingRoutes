@@ -4,14 +4,16 @@ using ClimbingRoutes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClimbingRoutes.Database.Migrations
 {
     [DbContext(typeof(ClimbingRoutesContext))]
-    partial class ClimbingRoutesContextModelSnapshot : ModelSnapshot
+    [Migration("20191025171136_Update008")]
+    partial class Update008
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,12 +110,7 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DisciplineId")
-                        .HasColumnType("int");
-
                     b.HasKey("GradeId");
-
-                    b.HasIndex("DisciplineId");
 
                     b.ToTable("Grades");
 
@@ -298,13 +295,6 @@ namespace ClimbingRoutes.Database.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ClimbingRoutes.Grade", b =>
-                {
-                    b.HasOne("ClimbingRoutes.Discipline", null)
-                        .WithMany("Grades")
-                        .HasForeignKey("DisciplineId");
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Route", b =>
