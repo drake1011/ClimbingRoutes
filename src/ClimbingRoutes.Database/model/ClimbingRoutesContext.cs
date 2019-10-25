@@ -36,20 +36,23 @@ namespace ClimbingRoutes
                 new Grade { GradeId = 2, Description = "7b", DisciplineId = 1 },
                 new Grade { GradeId = 3, Description = "7c", DisciplineId = 1 },
                 new Grade { GradeId = 4, Description = "E1", DisciplineId = 2 },
-                new Grade { GradeId = 5, Description = "f7a", DisciplineId = 3 }
+                new Grade { GradeId = 5, Description = "f7a", DisciplineId = 3 },
+                new Grade { GradeId = 6, Description = "VS", DisciplineId = 2 }
             );
 
             modelBuilder.Entity<Crag>().HasData(
                 new Crag {CragId = 1, Name = "Balmashanner" },
                 new Crag {CragId = 2, Name = "Ley Quarry" },
-                new Crag {CragId = 3, Name = "Rod Rocks" }
+                new Crag {CragId = 3, Name = "Rod Rocks" },
+                new Crag {CragId = 4, Name = "Clashrodney" }
             );
 
             modelBuilder.Entity<Route>().HasData(
                 new Route { RouteId = 1,  Name = "Savage Amusement", GradeId = 2, CragId = 1 },
                 new Route { RouteId = 2,  Name = "Nirvana", GradeId = 1, CragId = 2 },
                 new Route { RouteId = 4,  Name = "Le Bon Vacance", GradeId = 1, CragId = 1 },
-                new Route { RouteId = 3,  Name = "Sultan", GradeId = 3, CragId = 3 }
+                new Route { RouteId = 3,  Name = "Sultan", GradeId = 3, CragId = 3 },
+                new Route { RouteId = 5,  Name = "Serpent", GradeId = 6, CragId = 4 }
             );
 
             modelBuilder.Entity<Style>().HasData(
