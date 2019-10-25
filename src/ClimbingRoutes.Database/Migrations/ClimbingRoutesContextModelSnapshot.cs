@@ -210,24 +210,6 @@ namespace ClimbingRoutes.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ClimbingRoutes.Partnership", b =>
-                {
-                    b.Property<int>("PartnershipId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PartnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PartnershipId");
-
-                    b.ToTable("Partnerships");
-                });
-
             modelBuilder.Entity("ClimbingRoutes.Route", b =>
                 {
                     b.Property<int>("RouteId")
@@ -340,12 +322,7 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Users");
 
@@ -413,13 +390,6 @@ namespace ClimbingRoutes.Database.Migrations
                         .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ClimbingRoutes.User", b =>
-                {
-                    b.HasOne("ClimbingRoutes.User", null)
-                        .WithMany("Partners")
-                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

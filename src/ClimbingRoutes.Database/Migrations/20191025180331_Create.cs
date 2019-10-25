@@ -34,20 +34,6 @@ namespace ClimbingRoutes.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Partnerships",
-                columns: table => new
-                {
-                    PartnershipId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    PartnerId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Partnerships", x => x.PartnershipId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Styles",
                 columns: table => new
                 {
@@ -67,18 +53,11 @@ namespace ClimbingRoutes.Database.Migrations
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    UserId1 = table.Column<int>(nullable: true)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
-                    table.ForeignKey(
-                        name: "FK_Users_Users_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,7 +148,8 @@ namespace ClimbingRoutes.Database.Migrations
                 {
                     { 1, "Balmashanner" },
                     { 2, "Ley Quarry" },
-                    { 3, "Rod Rocks" }
+                    { 3, "Rod Rocks" },
+                    { 4, "Clashrodney" }
                 });
 
             migrationBuilder.InsertData(
@@ -195,12 +175,12 @@ namespace ClimbingRoutes.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "Name", "UserId1" },
+                columns: new[] { "UserId", "Email", "Name" },
                 values: new object[,]
                 {
-                    { 1, "123@456.com", "Andy", null },
-                    { 2, "789@456.com", "Keith", null },
-                    { 3, "legend_of@456.com", "Zorro", null }
+                    { 1, "123@456.com", "Andy" },
+                    { 2, "789@456.com", "Keith" },
+                    { 3, "legend_of@456.com", "Zorro" }
                 });
 
             migrationBuilder.InsertData(
@@ -212,6 +192,7 @@ namespace ClimbingRoutes.Database.Migrations
                     { 2, "7b", 1 },
                     { 3, "7c", 1 },
                     { 4, "E1", 2 },
+                    { 6, "VS", 2 },
                     { 5, "f7a", 3 }
                 });
 
@@ -223,7 +204,8 @@ namespace ClimbingRoutes.Database.Migrations
                     { 2, 2, 1, "Nirvana" },
                     { 4, 1, 1, "Le Bon Vacance" },
                     { 1, 1, 2, "Savage Amusement" },
-                    { 3, 3, 3, "Sultan" }
+                    { 3, 3, 3, "Sultan" },
+                    { 5, 4, 6, "Serpent" }
                 });
 
             migrationBuilder.InsertData(
@@ -266,20 +248,12 @@ namespace ClimbingRoutes.Database.Migrations
                 name: "IX_Routes_GradeId",
                 table: "Routes",
                 column: "GradeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_UserId1",
-                table: "Users",
-                column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Ascents");
-
-            migrationBuilder.DropTable(
-                name: "Partnerships");
 
             migrationBuilder.DropTable(
                 name: "Routes");

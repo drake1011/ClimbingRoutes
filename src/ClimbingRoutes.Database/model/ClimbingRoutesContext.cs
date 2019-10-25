@@ -9,7 +9,6 @@ namespace ClimbingRoutes
         public DbSet<Route> Routes { get; set; }
         public DbSet<Style> Styles { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Partnership> Partnerships { get; set; }
         public DbSet<Discipline> Disciplines { get; set; }
         public DbSet<Discipline> Crags { get; set; }
 

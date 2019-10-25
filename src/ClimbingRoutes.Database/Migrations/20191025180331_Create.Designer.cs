@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClimbingRoutes.Database.Migrations
 {
     [DbContext(typeof(ClimbingRoutesContext))]
-    [Migration("20191025173717_Create")]
+    [Migration("20191025180331_Create")]
     partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,6 +114,11 @@ namespace ClimbingRoutes.Database.Migrations
                         {
                             CragId = 3,
                             Name = "Rod Rocks"
+                        },
+                        new
+                        {
+                            CragId = 4,
+                            Name = "Clashrodney"
                         });
                 });
 
@@ -198,25 +203,13 @@ namespace ClimbingRoutes.Database.Migrations
                             GradeId = 5,
                             Description = "f7a",
                             DisciplineId = 3
+                        },
+                        new
+                        {
+                            GradeId = 6,
+                            Description = "VS",
+                            DisciplineId = 2
                         });
-                });
-
-            modelBuilder.Entity("ClimbingRoutes.Partnership", b =>
-                {
-                    b.Property<int>("PartnershipId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PartnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PartnershipId");
-
-                    b.ToTable("Partnerships");
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Route", b =>
@@ -271,6 +264,13 @@ namespace ClimbingRoutes.Database.Migrations
                             CragId = 3,
                             GradeId = 3,
                             Name = "Sultan"
+                        },
+                        new
+                        {
+                            RouteId = 5,
+                            CragId = 4,
+                            GradeId = 6,
+                            Name = "Serpent"
                         });
                 });
 
@@ -324,12 +324,7 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Users");
 
@@ -397,13 +392,6 @@ namespace ClimbingRoutes.Database.Migrations
                         .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ClimbingRoutes.User", b =>
-                {
-                    b.HasOne("ClimbingRoutes.User", null)
-                        .WithMany("Partners")
-                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }
