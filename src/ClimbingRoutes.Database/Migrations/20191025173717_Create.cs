@@ -8,16 +8,43 @@ namespace ClimbingRoutes.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Grades",
+                name: "Crag",
                 columns: table => new
                 {
-                    GradeId = table.Column<int>(nullable: false)
+                    CragId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Crag", x => x.CragId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Discipline",
+                columns: table => new
+                {
+                    DisciplineId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Grades", x => x.GradeId);
+                    table.PrimaryKey("PK_Discipline", x => x.DisciplineId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Partnerships",
+                columns: table => new
+                {
+                    PartnershipId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    PartnerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Partnerships", x => x.PartnershipId);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,11 +67,38 @@ namespace ClimbingRoutes.Database.Migrations
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true),
+                    UserId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Grades",
+                columns: table => new
+                {
+                    GradeId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(nullable: true),
+                    DisciplineId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grades", x => x.GradeId);
+                    table.ForeignKey(
+                        name: "FK_Grades_Discipline_DisciplineId",
+                        column: x => x.DisciplineId,
+                        principalTable: "Discipline",
+                        principalColumn: "DisciplineId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,11 +108,18 @@ namespace ClimbingRoutes.Database.Migrations
                     RouteId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    GradeId = table.Column<int>(nullable: false)
+                    GradeId = table.Column<int>(nullable: false),
+                    CragId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Routes", x => x.RouteId);
+                    table.ForeignKey(
+                        name: "FK_Routes_Crag_CragId",
+                        column: x => x.CragId,
+                        principalTable: "Crag",
+                        principalColumn: "CragId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Routes_Grades_GradeId",
                         column: x => x.GradeId,
@@ -102,13 +163,23 @@ namespace ClimbingRoutes.Database.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Grades",
-                columns: new[] { "GradeId", "Description" },
+                table: "Crag",
+                columns: new[] { "CragId", "Name" },
                 values: new object[,]
                 {
-                    { 1, "7a" },
-                    { 2, "7b" },
-                    { 3, "7c" }
+                    { 1, "Balmashanner" },
+                    { 2, "Ley Quarry" },
+                    { 3, "Rod Rocks" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Discipline",
+                columns: new[] { "DisciplineId", "Description" },
+                values: new object[,]
+                {
+                    { 1, "Sport" },
+                    { 2, "Trad" },
+                    { 3, "Bouldering" }
                 });
 
             migrationBuilder.InsertData(
@@ -124,23 +195,35 @@ namespace ClimbingRoutes.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "Name" },
+                columns: new[] { "UserId", "Email", "Name", "UserId1" },
                 values: new object[,]
                 {
-                    { 1, "123@456.com", "Andy" },
-                    { 2, "789@456.com", "Keith" },
-                    { 3, "legend_of@456.com", "Zorro" }
+                    { 1, "123@456.com", "Andy", null },
+                    { 2, "789@456.com", "Keith", null },
+                    { 3, "legend_of@456.com", "Zorro", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Grades",
+                columns: new[] { "GradeId", "Description", "DisciplineId" },
+                values: new object[,]
+                {
+                    { 1, "7a", 1 },
+                    { 2, "7b", 1 },
+                    { 3, "7c", 1 },
+                    { 4, "E1", 2 },
+                    { 5, "f7a", 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Routes",
-                columns: new[] { "RouteId", "GradeId", "Name" },
+                columns: new[] { "RouteId", "CragId", "GradeId", "Name" },
                 values: new object[,]
                 {
-                    { 2, 1, "Nirvana" },
-                    { 4, 1, "Le Bon Vacance" },
-                    { 1, 2, "Savage Amusement" },
-                    { 3, 3, "Sultan" }
+                    { 2, 2, 1, "Nirvana" },
+                    { 4, 1, 1, "Le Bon Vacance" },
+                    { 1, 1, 2, "Savage Amusement" },
+                    { 3, 3, 3, "Sultan" }
                 });
 
             migrationBuilder.InsertData(
@@ -170,15 +253,33 @@ namespace ClimbingRoutes.Database.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Grades_DisciplineId",
+                table: "Grades",
+                column: "DisciplineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Routes_CragId",
+                table: "Routes",
+                column: "CragId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Routes_GradeId",
                 table: "Routes",
                 column: "GradeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserId1",
+                table: "Users",
+                column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Ascents");
+
+            migrationBuilder.DropTable(
+                name: "Partnerships");
 
             migrationBuilder.DropTable(
                 name: "Routes");
@@ -190,7 +291,13 @@ namespace ClimbingRoutes.Database.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
+                name: "Crag");
+
+            migrationBuilder.DropTable(
                 name: "Grades");
+
+            migrationBuilder.DropTable(
+                name: "Discipline");
         }
     }
 }

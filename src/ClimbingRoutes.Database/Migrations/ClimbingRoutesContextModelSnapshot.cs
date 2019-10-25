@@ -83,6 +83,38 @@ namespace ClimbingRoutes.Database.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ClimbingRoutes.Crag", b =>
+                {
+                    b.Property<int>("CragId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CragId");
+
+                    b.ToTable("Crag");
+
+                    b.HasData(
+                        new
+                        {
+                            CragId = 1,
+                            Name = "Balmashanner"
+                        },
+                        new
+                        {
+                            CragId = 2,
+                            Name = "Ley Quarry"
+                        },
+                        new
+                        {
+                            CragId = 3,
+                            Name = "Rod Rocks"
+                        });
+                });
+
             modelBuilder.Entity("ClimbingRoutes.Discipline", b =>
                 {
                     b.Property<int>("DisciplineId")
@@ -95,7 +127,24 @@ namespace ClimbingRoutes.Database.Migrations
 
                     b.HasKey("DisciplineId");
 
-                    b.ToTable("Disciplines");
+                    b.ToTable("Discipline");
+
+                    b.HasData(
+                        new
+                        {
+                            DisciplineId = 1,
+                            Description = "Sport"
+                        },
+                        new
+                        {
+                            DisciplineId = 2,
+                            Description = "Trad"
+                        },
+                        new
+                        {
+                            DisciplineId = 3,
+                            Description = "Bouldering"
+                        });
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Grade", b =>
@@ -108,7 +157,7 @@ namespace ClimbingRoutes.Database.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DisciplineId")
+                    b.Property<int>("DisciplineId")
                         .HasColumnType("int");
 
                     b.HasKey("GradeId");
@@ -121,17 +170,32 @@ namespace ClimbingRoutes.Database.Migrations
                         new
                         {
                             GradeId = 1,
-                            Description = "7a"
+                            Description = "7a",
+                            DisciplineId = 1
                         },
                         new
                         {
                             GradeId = 2,
-                            Description = "7b"
+                            Description = "7b",
+                            DisciplineId = 1
                         },
                         new
                         {
                             GradeId = 3,
-                            Description = "7c"
+                            Description = "7c",
+                            DisciplineId = 1
+                        },
+                        new
+                        {
+                            GradeId = 4,
+                            Description = "E1",
+                            DisciplineId = 2
+                        },
+                        new
+                        {
+                            GradeId = 5,
+                            Description = "f7a",
+                            DisciplineId = 3
                         });
                 });
 
@@ -160,6 +224,9 @@ namespace ClimbingRoutes.Database.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CragId")
+                        .HasColumnType("int");
+
                     b.Property<int>("GradeId")
                         .HasColumnType("int");
 
@@ -167,6 +234,8 @@ namespace ClimbingRoutes.Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RouteId");
+
+                    b.HasIndex("CragId");
 
                     b.HasIndex("GradeId");
 
@@ -176,24 +245,28 @@ namespace ClimbingRoutes.Database.Migrations
                         new
                         {
                             RouteId = 1,
+                            CragId = 1,
                             GradeId = 2,
                             Name = "Savage Amusement"
                         },
                         new
                         {
                             RouteId = 2,
+                            CragId = 2,
                             GradeId = 1,
                             Name = "Nirvana"
                         },
                         new
                         {
                             RouteId = 4,
+                            CragId = 1,
                             GradeId = 1,
                             Name = "Le Bon Vacance"
                         },
                         new
                         {
                             RouteId = 3,
+                            CragId = 3,
                             GradeId = 3,
                             Name = "Sultan"
                         });
@@ -304,11 +377,19 @@ namespace ClimbingRoutes.Database.Migrations
                 {
                     b.HasOne("ClimbingRoutes.Discipline", null)
                         .WithMany("Grades")
-                        .HasForeignKey("DisciplineId");
+                        .HasForeignKey("DisciplineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ClimbingRoutes.Route", b =>
                 {
+                    b.HasOne("ClimbingRoutes.Crag", "Crag")
+                        .WithMany("Routes")
+                        .HasForeignKey("CragId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ClimbingRoutes.Grade", "Grade")
                         .WithMany("Routes")
                         .HasForeignKey("GradeId")

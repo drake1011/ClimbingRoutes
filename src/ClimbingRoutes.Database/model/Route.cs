@@ -11,6 +11,9 @@ namespace ClimbingRoutes
         public Grade Grade { get; set; }
         public int GradeId { get; set; }
 
+        public Crag Crag { get; set; }
+        public int CragId { get; set; }
+
         public IList<Ascent> Ascents { get; set; }
     }
 }
