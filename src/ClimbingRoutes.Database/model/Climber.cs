@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace ClimbingRoutes
 {
-    public class User
+    public class Climber
     {
-        public int UserId { get; set; }
+        public int ClimberId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
 

@@ -11,7 +11,7 @@ namespace ClimbingRoutes.Database.Test
         public void TestAllMethod()
         {
             // Arrange
-            var repo = new ClimbingRoutesRepository<User>(TestHelpers.GetNewContext());
+            var repo = new ClimbingRoutesRepository<Climber>(TestHelpers.GetNewContext());
             var expected = 3;
 
             // Act
@@ -67,7 +67,7 @@ namespace ClimbingRoutes.Database.Test
         public void TestUpdate()
         {
             // Arrange
-            var repo = new ClimbingRoutesRepository<User>(TestHelpers.GetNewContext());
+            var repo = new ClimbingRoutesRepository<Climber>(TestHelpers.GetNewContext());
             string expected = "Zaphod";
 
             // Act

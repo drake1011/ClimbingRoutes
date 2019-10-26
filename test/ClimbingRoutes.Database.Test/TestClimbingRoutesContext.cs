@@ -12,7 +12,7 @@ namespace ClimbingRoutes.Database.Test
         public void TrivialTest()
         {
             // Arrange
-            var user = new User() { Name = "Andy", Email = "123@456.com" };
+            var user = new Climber() { Name = "Andy", Email = "123@456.com" };
 
             // Act
             user.Name = "Changed";
@@ -127,10 +127,10 @@ namespace ClimbingRoutes.Database.Test
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                context.Users.Add(new User() { Name = "Matthew" });
-                context.Users.Add(new User() { Name = "Mark" });
-                context.Users.Add(new User() { Name = "Luke" });
-                context.Users.Add(new User() { Name = "John" });
+                context.Users.Add(new Climber() { Name = "Matthew" });
+                context.Users.Add(new Climber() { Name = "Mark" });
+                context.Users.Add(new Climber() { Name = "Luke" });
+                context.Users.Add(new Climber() { Name = "John" });
 
                 context.SaveChanges();
             }
