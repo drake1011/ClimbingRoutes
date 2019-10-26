@@ -1,6 +1,6 @@
 using System;
 
-namespace ClimbingRoutes
+namespace ClimbingRoutes.Database.Model
 {
     public class Ascent
     {

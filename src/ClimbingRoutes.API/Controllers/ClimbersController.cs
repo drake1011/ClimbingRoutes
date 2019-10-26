@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClimbingRoutes.Database;
+using ClimbingRoutes.API.DTOs;
+using ClimbingRoutes.API.Helpers;
+using ClimbingRoutes.Database.Model;
 
 namespace ClimbingRoutes.API.Controllers
 {
@@ -20,9 +23,23 @@ namespace ClimbingRoutes.API.Controllers
         }
 
         [HttpGet()]
-        public IActionResult GetClimbers()
+        public ActionResult<IEnumerable<ClimberDto>> GetClimbers()
         {
-            var climbers = _climberRepository.All();
+            var climberEntities = _climberRepository.All();
+
+            var climbers = new List<ClimberDto>();
+
+            foreach (var entity in climberEntities)
+            {
+                climbers.Add(new ClimberDto()
+                {
+                    Id = entity.ClimberId,
+                    Name = $"{entity.FirstName} {entity.LastName}",
+                    Age = entity.DateOfBirth.GetCurrentAge()
+                }); ;
+            }
+
+
             return Ok(climbers);
         }
 
@@ -30,7 +47,10 @@ namespace ClimbingRoutes.API.Controllers
         public IActionResult GetClimber(int climberId)
         {
             var climber = _climberRepository.FindByKey(climberId);
-            if (climber is null) return NotFound();
+            
+            if (climber is null)
+                return NotFound();
+            
             return Ok(climber);
         }
     }

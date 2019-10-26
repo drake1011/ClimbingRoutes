@@ -3,6 +3,7 @@ using Xunit;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using ClimbingRoutes.Database.Model;
 
 namespace ClimbingRoutes.Database.Test
 {
@@ -12,13 +13,13 @@ namespace ClimbingRoutes.Database.Test
         public void TrivialTest()
         {
             // Arrange
-            var user = new Climber() { Name = "Andy", Email = "123@456.com" };
+            var user = new Climber() { FirstName = "Andy", Email = "123@456.com" };
 
             // Act
-            user.Name = "Changed";
+            user.FirstName = "Changed";
 
             //Assert
-            Assert.Equal("Changed", user.Name);
+            Assert.Equal("Changed", user.FirstName);
         }
 
         [Fact]
@@ -127,10 +128,10 @@ namespace ClimbingRoutes.Database.Test
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                context.Users.Add(new Climber() { Name = "Matthew" });
-                context.Users.Add(new Climber() { Name = "Mark" });
-                context.Users.Add(new Climber() { Name = "Luke" });
-                context.Users.Add(new Climber() { Name = "John" });
+                context.Users.Add(new Climber() { FirstName = "Matthew", LastName = "??", Email = "111@222.com" });
+                context.Users.Add(new Climber() { FirstName = "Mark", LastName = "??", Email = "111@222.com" });
+                context.Users.Add(new Climber() { FirstName = "Luke", LastName = "??", Email = "111@222.com" });
+                context.Users.Add(new Climber() { FirstName = "John", LastName = "??", Email = "111@222.com" });
 
                 context.SaveChanges();
             }

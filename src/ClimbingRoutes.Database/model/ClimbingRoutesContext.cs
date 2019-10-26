@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ClimbingRoutes
+namespace ClimbingRoutes.Database.Model
 {
     public class ClimbingRoutesContext : DbContext
     {
@@ -19,9 +19,9 @@ namespace ClimbingRoutes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Climber>().HasData(
-                new Climber { ClimberId = 1, Name = "Andy", Email = "123@456.com" },
-                new Climber { ClimberId = 2, Name = "Keith", Email = "789@456.com" },
-                new Climber { ClimberId = 3, Name = "Zorro", Email = "legend_of@456.com" }
+                new Climber { ClimberId = 1, FirstName = "Andy", LastName = "Watt", Email = "123@456.com" },
+                new Climber { ClimberId = 2, FirstName = "Rand", LastName = "al'Thor", Email = "789@456.com" },
+                new Climber { ClimberId = 3, FirstName = "Matrim", LastName= "Cauthorn", Email = "legend_of@456.com" }
             );
 
             modelBuilder.Entity<Discipline>().HasData(
