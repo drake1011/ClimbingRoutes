@@ -1,19 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using ClimbingRoutes.Database.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite; // this must die
+using Microsoft.EntityFrameworkCore; // this too must die
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace ClimbingRoutes.API
 {
@@ -35,7 +30,15 @@ namespace ClimbingRoutes.API
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddDbContext<ClimbingRoutesContext>();
+            services.AddDbContext<ClimbingRoutesContext>(options => {
+                var connectionStringBuilder =
+                    new SqliteConnectionStringBuilder { DataSource = ":memory:" };
+
+                var connection = new SqliteConnection(connectionStringBuilder.ToString());
+
+                options.UseSqlite(connection);
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +60,7 @@ namespace ClimbingRoutes.API
                 });
 
             }
-            
+
             app.UseRouting();
 
             app.UseAuthorization();

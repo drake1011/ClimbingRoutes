@@ -15,6 +15,10 @@ namespace ClimbingRoutes.API.Profiles
         {
             CreateMap<Climber, ClimberDto>()
                 .ForMember(
+                    dest => dest.Id,
+                    opt => opt.MapFrom(src => src.ClimberId)
+                )
+                .ForMember(
                     dest => dest.Name,
                     opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
                 .ForMember(
