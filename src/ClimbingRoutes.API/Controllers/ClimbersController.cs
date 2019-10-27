@@ -7,6 +7,7 @@ using ClimbingRoutes.Database;
 using ClimbingRoutes.API.DTOs;
 using ClimbingRoutes.API.Helpers;
 using ClimbingRoutes.Database.Model;
+using AutoMapper;
 
 namespace ClimbingRoutes.API.Controllers
 {
@@ -15,43 +16,33 @@ namespace ClimbingRoutes.API.Controllers
     public class ClimbersController : ControllerBase
     {
         private readonly IClimbingRoutesRepository<Climber> _climberRepository;
+        private readonly IMapper _mapper;
 
-        public ClimbersController(IClimbingRoutesRepository<Climber> climberRepository)
+        public ClimbersController(IClimbingRoutesRepository<Climber> climberRepository, IMapper mapper)
         {
             _climberRepository = climberRepository ??
                 throw new ArgumentNullException(nameof(climberRepository));
+
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet()]
         public ActionResult<IEnumerable<ClimberDto>> GetClimbers()
         {
             var climberEntities = _climberRepository.All();
-
-            var climbers = new List<ClimberDto>();
-
-            foreach (var entity in climberEntities)
-            {
-                climbers.Add(new ClimberDto()
-                {
-                    Id = entity.ClimberId,
-                    Name = $"{entity.FirstName} {entity.LastName}",
-                    Age = entity.DateOfBirth.GetCurrentAge()
-                }); ;
-            }
-
-
-            return Ok(climbers);
+            return Ok(_mapper.Map<IEnumerable<ClimberDto>>(climberEntities));
         }
 
         [HttpGet("{climberId:int}")]
         public IActionResult GetClimber(int climberId)
         {
-            var climber = _climberRepository.FindByKey(climberId);
+            var entity = _climberRepository.FindByKey(climberId);
             
-            if (climber is null)
+            if (entity is null)
                 return NotFound();
             
-            return Ok(climber);
+            return Ok(_mapper.Map<ClimberDto>(entity));
         }
     }
 }
