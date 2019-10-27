@@ -24,6 +24,8 @@ namespace ClimbingRoutes.API.Profiles
                 .ForMember(
                     dest => dest.Age,
                     opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()));
+
+            CreateMap<ClimberCreationDto, Climber>();
         }
     }
 }

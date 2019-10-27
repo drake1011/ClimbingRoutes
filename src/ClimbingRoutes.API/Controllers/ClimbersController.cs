@@ -9,6 +9,7 @@ using ClimbingRoutes.API.Helpers;
 using ClimbingRoutes.Database.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore; // this must die
+using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace ClimbingRoutes.API.Controllers
 {
@@ -42,7 +43,7 @@ namespace ClimbingRoutes.API.Controllers
             return Ok(_mapper.Map<IEnumerable<ClimberDto>>(climberEntities));
         }
 
-        [HttpGet("{climberId:int}")]
+        [HttpGet("{climberId}", Name = "GetClimber")]
         [HttpHead]
         public IActionResult GetClimber(int climberId)
         {
@@ -52,6 +53,19 @@ namespace ClimbingRoutes.API.Controllers
                 return NotFound();
 
             return Ok(_mapper.Map<ClimberDto>(entity));
+        }
+
+        [HttpPost]
+        public ActionResult<ClimberDto> CreateClimber(ClimberCreationDto climber)
+        {
+            var entity = _mapper.Map<Climber>(climber);
+            _set.Add(entity);
+            _context.SaveChanges();
+            return CreatedAtRoute(
+                "GetClimber",
+                new { climberId = entity.ClimberId },
+                _mapper.Map<ClimberDto>(entity)
+            );
         }
     }
 }
