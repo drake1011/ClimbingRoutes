@@ -2,6 +2,7 @@ using Xunit;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using ClimbingRoutes.Database.Model;
 
 namespace ClimbingRoutes.Database.Test
 {
@@ -11,7 +12,7 @@ namespace ClimbingRoutes.Database.Test
         public void TestAllMethod()
         {
             // Arrange
-            var repo = new ClimbingRoutesRepository<User>(TestHelpers.GetNewContext());
+            var repo = new ClimbingRoutesRepository<Climber>(TestHelpers.GetNewContext());
             var expected = 3;
 
             // Act
@@ -47,7 +48,7 @@ namespace ClimbingRoutes.Database.Test
             var initalExpected = 4;
             var finalExpected = 5;
             var ascent = new Ascent(){
-                    UserId = 2,
+                    ClimberId = 2,
                     RouteId = 1,
                     StyleId = 2,
                     Date = new System.DateTime(year: 2019, month: 10, day: 18)
@@ -67,15 +68,15 @@ namespace ClimbingRoutes.Database.Test
         public void TestUpdate()
         {
             // Arrange
-            var repo = new ClimbingRoutesRepository<User>(TestHelpers.GetNewContext());
+            var repo = new ClimbingRoutesRepository<Climber>(TestHelpers.GetNewContext());
             string expected = "Zaphod";
 
             // Act
             var user = repo.All().FirstOrDefault();
-            var initial = user.Name;
-            user.Name = expected;
+            var initial = user.FirstName;
+            user.FirstName = expected;
             repo.Update(user);
-            var actual = repo.All().FirstOrDefault().Name;
+            var actual = repo.All().FirstOrDefault().FirstName;
 
             // Assert
             Assert.NotEqual(expected, initial); // Make sure the names are not equal at the start

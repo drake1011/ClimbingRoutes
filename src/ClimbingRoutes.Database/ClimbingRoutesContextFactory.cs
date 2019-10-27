@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Configuration.FileExtensions;
 using System.IO;
+using ClimbingRoutes.Database.Model;
 
 namespace ClimbingRoutes
 {

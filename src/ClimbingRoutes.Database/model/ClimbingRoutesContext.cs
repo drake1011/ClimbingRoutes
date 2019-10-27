@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ClimbingRoutes
+namespace ClimbingRoutes.Database.Model
 {
     public class ClimbingRoutesContext : DbContext
     {
@@ -8,7 +8,7 @@ namespace ClimbingRoutes
         public DbSet<Ascent> Ascents { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<Style> Styles { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Climber> Climbers { get; set; }
         public DbSet<Discipline> Disciplines { get; set; }
         public DbSet<Discipline> Crags { get; set; }
 
@@ -18,10 +18,25 @@ namespace ClimbingRoutes
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
-                new User { UserId = 1, Name = "Andy", Email = "123@456.com" },
-                new User { UserId = 2, Name = "Keith", Email = "789@456.com" },
-                new User { UserId = 3, Name = "Zorro", Email = "legend_of@456.com" }
+            modelBuilder.Entity<Climber>().HasData(
+                new Climber {
+                    ClimberId = 1,
+                    FirstName = "Andy",
+                    LastName = "Watt",
+                    Email = "123@456.com",
+                    DateOfBirth = new System.DateTimeOffset(new System.DateTime(year: 1983, month: 10, day: 2)) },
+                new Climber {
+                    ClimberId = 2,
+                    FirstName = "Rand",
+                    LastName = "al'Thor",
+                    Email = "789@456.com",
+                    DateOfBirth = new System.DateTimeOffset(new System.DateTime(year: 1986, month: 5, day: 15)) },
+                new Climber {
+                    ClimberId = 3,
+                    FirstName = "Matrim",
+                    LastName= "Cauthorn",
+                    Email = "legend_of@456.com",
+                    DateOfBirth = new System.DateTimeOffset(new System.DateTime(year: 1990, month: 8, day: 10)) }
             );
 
             modelBuilder.Entity<Discipline>().HasData(
@@ -64,28 +79,28 @@ namespace ClimbingRoutes
             modelBuilder.Entity<Ascent>().HasData(
                 new Ascent {
                     AscentId = 1,
-                    UserId = 1,
+                    ClimberId = 1,
                     RouteId = 1,
                     StyleId = 2,
                     Date = new System.DateTime(year: 2015, month: 7, day: 24)
                 },
                 new Ascent {
                     AscentId = 2,
-                    UserId = 1,
+                    ClimberId = 1,
                     RouteId = 4,
                     StyleId = 2,
                     Date = new System.DateTime(year: 2011, month: 7, day: 4)
                 },
                 new Ascent {
                     AscentId = 3,
-                    UserId = 1,
+                    ClimberId = 1,
                     RouteId = 2,
                     StyleId = 2,
                     Date = new System.DateTime(year: 2015, month: 8, day: 1)
                 },
                 new Ascent {
                     AscentId = 4,
-                    UserId = 1,
+                    ClimberId = 1,
                     RouteId = 3,
                     StyleId = 4,
                     Date = new System.DateTime(year: 2015, month: 9, day: 1)

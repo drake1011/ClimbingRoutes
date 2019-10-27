@@ -1,3 +1,4 @@
+using ClimbingRoutes.Database.Model;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 

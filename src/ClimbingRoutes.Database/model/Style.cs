@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ClimbingRoutes
+namespace ClimbingRoutes.Database.Model
 {
     public class Style
     {
